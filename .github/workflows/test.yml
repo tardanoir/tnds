@@ -28,5 +28,5 @@ jobs:
     
     - name: Lint with ruff
       run: |
-        ruff check --exclude "src/custom_ds_cli/template/**" .
-        ruff format --check --exclude "src/custom_ds_cli/template/**" . 
+        ruff check --exclude "src/tnds/template/**" .
+        ruff format --check --exclude "src/tnds/template/**" . 

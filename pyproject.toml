@@ -21,10 +21,10 @@ readme = "README.md"
 license = {text = "MIT"}
 
 [project.urls]
-Homepage = "https://github.com/felipegalo/tnds"
-Documentation = "https://github.com/felipegalo/tnds#readme"
-Repository = "https://github.com/felipegalo/tnds.git"
-Issues = "https://github.com/felipegalo/tnds/issues"
+Homepage = "https://github.com/tardanoir/tnds"
+Documentation = "https://github.com/tardanoir/tnds#readme"
+Repository = "https://github.com/tardanoir/tnds.git"
+Issues = "https://github.com/tardanoir/tnds/issues"
 
 [project.optional-dependencies]
 dev = [
