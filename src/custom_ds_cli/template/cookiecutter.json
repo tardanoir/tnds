@@ -1,12 +1,23 @@
 {
-    "project_name": "project_name",
-    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+    "project_name": "My Data Science Project",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
     "description": "A data science project",
     "author": "Your Name",
     "email": "your.email@example.com",
-    "python_version": ["3.10", "3.11"],
-    "include_django": "no",
+    "python_version": "3.10",
+    "include_django": ["yes", "no"],
     "gcs_bucket": "",
-    "use_precommit": "yes",
+    "use_precommit": ["yes", "no"],
+    "_copy_without_render": [
+        "*.html",
+        "*.js",
+        "*.css"
+    ],
+    "_conditional_files": {
+        "include_django == 'yes'": [
+            "manage.py",
+            "{{ cookiecutter.project_slug }}/*"
+        ]
+    },
     "open_source_license": ["MIT", "BSD-3-Clause", "No license file"]
 } 
