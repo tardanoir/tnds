@@ -3,11 +3,11 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "custom-ds-cli"
+name = "tnds"
 version = "0.1.0"
-description = "A CLI tool for generating standardized data science project templates"
+description = "Tardanoir's Data Science Project Generator"
 authors = [
-    {name = "Your Name", email = "your.email@example.com"},
+    {name = "Felipe Galo", email = "felipe.galo@gmail.com"},
 ]
 dependencies = [
     "click>=8.0.0",
@@ -21,24 +21,23 @@ readme = "README.md"
 license = {text = "MIT"}
 
 [project.urls]
-Homepage = "https://github.com/yourusername/custom-ds-cli"
-Documentation = "https://github.com/yourusername/custom-ds-cli#readme"
-Repository = "https://github.com/yourusername/custom-ds-cli.git"
-Issues = "https://github.com/yourusername/custom-ds-cli/issues"
+Homepage = "https://github.com/felipegalo/tnds"
+Documentation = "https://github.com/felipegalo/tnds#readme"
+Repository = "https://github.com/felipegalo/tnds.git"
+Issues = "https://github.com/felipegalo/tnds/issues"
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.0.0",
     "ruff>=0.2.0",
     "build>=1.0.0",
     "twine>=4.0.0",
 ]
 
 [project.scripts]
-tnds = "custom_ds_cli.cli:cli"
+tnds = "tnds.cli:cli"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/custom_ds_cli"]
+packages = ["src/tnds"]
 
 [tool.ruff]
 target-version = "py38"
@@ -47,10 +46,10 @@ line-length = 88
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "N", "B", "C4"]
 ignore = []
-exclude = ["src/custom_ds_cli/template/**"]
+exclude = ["src/tnds/template/**"]
 
 [tool.ruff.lint.per-file-ignores]
-"src/custom_ds_cli/template/**" = ["N999"]
+"src/tnds/template/**" = ["N999"]
 
 [tool.ruff.format]
 quote-style = "double"

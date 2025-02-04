@@ -1,11 +1,11 @@
-# Custom Data Science Project Generator
+# TNDS - Tardanoir's Data Science Project Generator
 
 A CLI tool for generating standardized data science project templates with best practices built-in.
 
 ## Features
 
 - Standardized data science project structure
-- Optional Django integration
+- Optional Django integration for ML model tracking
 - GCS bucket integration for data sync
 - Pre-commit hooks with ruff for code quality
 - Makefile with common commands
@@ -15,7 +15,7 @@ A CLI tool for generating standardized data science project templates with best 
 ## Installation
 
 ```bash
-pip install custom-ds-cli
+pip install tnds
 ```
 
 ## Usage
@@ -43,14 +43,31 @@ tnds list
 ├── models/            <- Trained models
 ├── notebooks/         <- Jupyter notebooks (for exploration only)
 ├── references/        <- Data dictionaries, manuals, etc.
-├── reports/           <- Generated analysis
+├── reports/          <- Generated analysis
 │   └── figures/      <- Generated graphics and figures
-└── src/               <- Source code
+└── src/              <- Source code
     ├── data/         <- Scripts to process data
     ├── features/     <- Feature engineering code
     ├── models/       <- Model training and prediction
     └── visualization/<- Analysis and reporting scripts
 ```
+
+## Optional Features
+
+### Django Integration
+
+If you choose to include Django, your project will get:
+- Model tracking with versioning
+- REST API for model metadata
+- Performance metrics tracking
+- Model artifact storage
+
+### GCS Integration
+
+When you specify a GCS bucket, you'll get:
+- Makefile commands for data sync
+- Automatic data directory structure
+- Documentation for data versioning
 
 ## Development
 
@@ -59,17 +76,16 @@ tnds list
 pip install -e ".[dev]"
 ```
 
-2. Install pre-commit hooks:
-```bash
-pre-commit install
-```
-
-3. Run linting:
+2. Run linting:
 ```bash
 ruff check .
 ```
 
-4. Format code:
+3. Format code:
 ```bash
 ruff format .
-``` 
+```
+
+## License
+
+MIT 
