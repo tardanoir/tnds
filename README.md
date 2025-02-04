@@ -15,7 +15,7 @@ A CLI tool for generating standardized data science project templates with best 
 ## Installation
 
 ```bash
-pip install -e .
+pip install custom-ds-cli
 ```
 
 ## Usage
@@ -23,26 +23,16 @@ pip install -e .
 Create a new data science project:
 
 ```bash
-create-ds my_project
+tnds
 ```
 
-### Options
-
-- `--django`: Include Django setup
-- `--gcs-bucket TEXT`: GCS bucket name for data sync
-- `--output-dir TEXT`: Where to output the project (default: current directory)
-- `--python-version [3.10|3.11]`: Python version to use (default: 3.10)
-- `--no-precommit`: Skip pre-commit hooks setup
-
-### Example
+This will start an interactive prompt to configure your project. You can also list available options:
 
 ```bash
-create-ds my_project --python-version 3.11 --django --gcs-bucket my-bucket
+tnds list
 ```
 
-## Project Structure
-
-The generated project will have the following structure:
+### Example Project Structure
 
 ```
 ├── data/               <- Data files
