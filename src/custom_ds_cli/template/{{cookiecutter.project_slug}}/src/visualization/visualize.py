@@ -1,4 +1,5 @@
 """Functions for creating visualizations."""
+
 from pathlib import Path
 
 
@@ -7,13 +8,14 @@ def load_data():
     # project_dir = Path(__file__).resolve().parents[2]
     return None
 
+
 def create_visualizations(data):
     """Create visualizations from the data."""
     # Create figures directory if it doesn't exist
     project_dir = Path(__file__).resolve().parents[2]
-    figures_path = project_dir / 'reports' / 'figures'
+    figures_path = project_dir / "reports" / "figures"
     figures_path.mkdir(parents=True, exist_ok=True)
-    
+
     # Example:
     # import matplotlib.pyplot as plt
     # import seaborn as sns
@@ -33,13 +35,15 @@ def create_visualizations(data):
     # plt.close()
     pass
 
+
 def main():
     """Run the visualization pipeline."""
     # Load data
     data = load_data()
-    
+
     # Create visualizations
     create_visualizations(data)
 
-if __name__ == '__main__':
-    main() 
+
+if __name__ == "__main__":
+    main()
