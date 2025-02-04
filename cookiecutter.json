@@ -1,0 +1,9 @@
+{
+    "project_name": "project_name",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+    "description": "A data science project",
+    "author": "Your Name",
+    "include_django": "no",
+    "gcs_bucket": "",
+    "open_source_license": ["MIT", "BSD-3-Clause", "No license file"]
+} 
