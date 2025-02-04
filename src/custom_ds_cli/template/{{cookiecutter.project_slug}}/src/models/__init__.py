@@ -1,1 +1,1 @@
-"""Model training and prediction module.""" 
+"""Model training and prediction module."""

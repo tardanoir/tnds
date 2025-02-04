@@ -5,36 +5,20 @@ build-backend = "hatchling.build"
 [project]
 name = "custom-ds-cli"
 version = "0.1.0"
-description = "Custom Data Science Project Generator"
-readme = "README.md"
-requires-python = ">=3.8"
-license = {text = "MIT"}
+description = "A CLI tool for generating standardized data science project templates"
 authors = [
-    { name = "Your Name", email = "your.email@example.com" },
-]
-keywords = ["data-science", "project-template", "cookiecutter", "cli"]
-classifiers = [
-    "Development Status :: 4 - Beta",
-    "Environment :: Console",
-    "Intended Audience :: Developers",
-    "Intended Audience :: Science/Research",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Topic :: Scientific/Engineering :: Artificial Intelligence",
-    "Topic :: Software Development :: Libraries :: Python Modules",
+    {name = "Your Name", email = "your.email@example.com"},
 ]
 dependencies = [
     "click>=8.0.0",
     "cookiecutter>=2.1.0",
-    "rich>=10.0.0",  # For better CLI formatting
-    "packaging>=23.0",  # For version parsing
-    "questionary>=2.0.0",  # For interactive CLI prompts
+    "packaging>=23.0",
+    "questionary>=2.0.0",
+    "rich>=10.0.0",
 ]
+requires-python = ">=3.8"
+readme = "README.md"
+license = {text = "MIT"}
 
 [project.urls]
 Homepage = "https://github.com/yourusername/custom-ds-cli"
@@ -45,8 +29,7 @@ Issues = "https://github.com/yourusername/custom-ds-cli/issues"
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0.0",
-    "ruff>=0.1.0",
-    "pre-commit>=3.0.0",
+    "ruff>=0.2.0",
     "build>=1.0.0",
     "twine>=4.0.0",
 ]
@@ -58,11 +41,16 @@ tnds = "custom_ds_cli.cli:cli"
 packages = ["src/custom_ds_cli"]
 
 [tool.ruff]
-line-length = 88
 target-version = "py38"
+line-length = 88
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "N", "B", "C4"]
+ignore = []
+exclude = ["src/custom_ds_cli/template/**"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/custom_ds_cli/template/**" = ["N999"]
 
 [tool.ruff.format]
 quote-style = "double"
