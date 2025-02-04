@@ -1,11 +1,12 @@
+"""CLI for creating data science projects."""
+import logging
+import sys
+from pathlib import Path
+
 import click
 import cookiecutter.main
-import os
-from pathlib import Path
-import sys
-import logging
-from packaging import version
 import questionary
+from packaging import version
 from rich.console import Console
 from rich.panel import Panel
 
@@ -17,17 +18,20 @@ logger = logging.getLogger(__name__)
 
 PYTHON_VERSIONS = ['3.8', '3.9', '3.10', '3.11', '3.12']
 
-def validate_project_name(name):
+def validate_project_name(_, __, name):
     """Validate that the project name is a valid Python identifier."""
     if not name.isidentifier():
-        return "Project name must be a valid Python identifier (letters, numbers, underscore, not starting with number)"
+        return (
+            "Project name must be a valid Python identifier "
+            "(letters, numbers, underscore, not starting with number)"
+        )
     return True
 
 def get_project_config():
     """Interactive prompt for project configuration."""
     console.print(Panel.fit(
-        "🚀 Welcome to the Data Science Project Generator!",
-        title="DS Project Setup",
+        "🐔 Welcome to Tardanoir's Data Science Project Generator 🐔",
+        title="TNDS",
         border_style="blue"
     ))
     
@@ -76,10 +80,13 @@ def get_project_config():
     if not answers: 
         sys.exit(0)
         
-    if answers['include_django'] and version.parse(answers['python_version']) < version.parse('3.10'):
-        if not questionary.confirm(
-            "⚠️  Warning: Django 4.2+ requires Python 3.10 or higher. Do you want to continue anyway?"
-        ).ask():
+    if (answers['include_django'] and 
+            version.parse(answers['python_version']) < version.parse('3.10')):
+        warning_msg = (
+            "⚠️  Warning: Django 4.2+ requires Python 3.10 or higher. "
+            "Do you want to continue anyway?"
+        )
+        if not questionary.confirm(warning_msg).ask():
             sys.exit(1)
     
     return answers
@@ -109,21 +116,30 @@ def cli(ctx):
                 output_dir=config['output_dir']
             )
             
-            # If Django is included, update the pyproject.toml to add Django dependencies
+            project_path = Path(config['output_dir']) / config['project_name']
+            pyproject_path = project_path / "pyproject.toml"
+            
+            with open(pyproject_path) as f:
+                content = f.read()
+            
+            content = content.replace(
+                'requires-python = ">=3.8"',
+                f'requires-python = ">={config["python_version"]}"'
+            )
+            
             if config['include_django']:
-                project_path = Path(config['output_dir']) / config['project_name']
-                pyproject_path = project_path / "pyproject.toml"
-                with open(pyproject_path, 'r') as f:
-                    content = f.read()
-                
-                # Add Django dependencies to the main dependencies list
+                django_deps = (
+                    ',\n    "django>=4.2.0",'
+                    '\n    "djangorestframework>=3.14.0"'
+                    '\n]\n\n[project.optional-dependencies]'
+                )
                 content = content.replace(
                     ']\n\n[project.optional-dependencies]',
-                    ',\n    "django>=4.2.0",\n    "djangorestframework>=3.14.0"\n]\n\n[project.optional-dependencies]'
+                    django_deps
                 )
-                
-                with open(pyproject_path, 'w') as f:
-                    f.write(content)
+            
+            with open(pyproject_path, 'w') as f:
+                f.write(content)
             
             console.print("\n✨ Project successfully created! ✨\n", style="green bold")
             console.print("Next steps:")

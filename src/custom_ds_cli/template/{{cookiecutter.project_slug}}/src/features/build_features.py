@@ -1,65 +1,51 @@
 """Feature engineering functions."""
-import logging
+
 from pathlib import Path
 
 import pandas as pd
-import numpy as np
+
 
 def load_raw_data():
     """Load raw data."""
     project_dir = Path(__file__).resolve().parents[2]
-    raw_data_path = project_dir / 'data' / 'raw'
-    
-    # Add your data loading code here
+    raw_data_path = project_dir / "data" / "raw" / "data.csv"
+    return pd.read_csv(raw_data_path)
+    # Example:
+    # raw_data_path = project_dir / 'data' / 'raw' / 'data.csv'
+    # return pd.read_csv(raw_data_path)
     return None
 
-def create_features(df):
-    """Create features from raw data."""
-    # Add your feature engineering code here
+
+def build_features(data):
+    """Build features from raw data."""
     # Example:
-    # df['new_feature'] = df['raw_column'].apply(some_transformation)
-    return df
+    # features = data.copy()
+    # features['new_feature'] = features['column'].apply(some_transformation)
+    return None
 
-def handle_missing_values(df):
-    """Handle missing values in the dataset."""
-    # Add your missing value handling code here
-    return df
 
-def encode_categorical_variables(df):
-    """Encode categorical variables."""
-    # Add your categorical encoding code here
-    return df
-
-def save_features(df):
+def save_features(features):
     """Save engineered features."""
     project_dir = Path(__file__).resolve().parents[2]
-    processed_data_path = project_dir / 'data' / 'processed'
-    processed_data_path.mkdir(exist_ok=True)
-    
-    # Add your code to save the processed data
+    features_path = project_dir / "data" / "processed"
+    features_path.mkdir(parents=True, exist_ok=True)
+
+    # Example:
+    # features.to_csv(features_path / 'features.csv', index=False)
     pass
 
-def main():
-    """Main feature engineering function."""
-    logger = logging.getLogger(__name__)
-    logger.info('Engineering features from raw data')
-    
-    # Load data
-    df = load_raw_data()
-    
-    # Handle missing values
-    df = handle_missing_values(df)
-    
-    # Create features
-    df = create_features(df)
-    
-    # Encode categorical variables
-    df = encode_categorical_variables(df)
-    
-    # Save features
-    save_features(df)
 
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
-    main() 
+def main():
+    """Run the feature engineering pipeline."""
+    # Load raw data
+    raw_data = load_raw_data()
+
+    # Build features
+    features = build_features(raw_data)
+
+    # Save features
+    save_features(features)
+
+
+if __name__ == "__main__":
+    main()

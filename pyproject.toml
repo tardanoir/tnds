@@ -58,20 +58,13 @@ tnds = "custom_ds_cli.cli:cli"
 packages = ["src/custom_ds_cli"]
 
 [tool.ruff]
-# Enable pycodestyle ('E'), pyflakes ('F'), isort ('I'), pyupgrade ('UP'), naming ('N'), bugbear ('B'), comprehensions ('C4')
-select = ["E", "F", "I", "UP", "N", "B", "C4"]
-
-# Same as Black.
 line-length = 88
-indent-width = 4
-
-# Assume Python 3.8
 target-version = "py38"
 
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "N", "B", "C4"]
+
 [tool.ruff.format]
-# Use double quotes for strings.
 quote-style = "double"
-# Indent with spaces.
 indent-style = "space"
-# Line ending style
 line-ending = "auto" 

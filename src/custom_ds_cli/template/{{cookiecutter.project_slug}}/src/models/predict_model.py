@@ -1,62 +1,62 @@
 """Use trained model to make predictions."""
-import logging
 from pathlib import Path
 
 import pandas as pd
 
+
 def load_model():
     """Load the trained model."""
-    project_dir = Path(__file__).resolve().parents[2]
-    models_path = project_dir / 'models'
-    
-    # Add your model loading code here
+    # project_dir = Path(__file__).resolve().parents[2]
     return None, None
 
 def load_data():
     """Load data to make predictions on."""
     project_dir = Path(__file__).resolve().parents[2]
     data_path = project_dir / 'data' / 'processed'
-    
-    # Add your data loading code here
+    return pd.read_csv(data_path / 'features.csv')
+    # Example:
+    # import pandas as pd
+    # data_path = project_dir / 'data' / 'processed'
+    # features = pd.read_csv(data_path / 'features.csv')
     return None
 
-def make_predictions(model, scaler, X):
+def make_predictions(model, scaler, features):
     """Make predictions using the trained model."""
     # Scale the features
-    X_scaled = scaler.transform(X)
+    features_scaled = scaler.transform(features)
     
     # Make predictions
-    predictions = model.predict(X_scaled)
+    predictions = model.predict(features_scaled)
     
     return predictions
 
-def save_predictions(predictions):
-    """Save predictions to file."""
-    project_dir = Path(__file__).resolve().parents[2]
-    predictions_path = project_dir / 'models' / 'predictions'
-    predictions_path.mkdir(exist_ok=True)
+def save_predictions(predictions, output_path=None):
+    """Save predictions to a file."""
+    if output_path is None:
+        project_dir = Path(__file__).resolve().parents[2]
+        output_path = project_dir / 'data' / 'predictions' / 'predictions.csv'
     
-    # Add your code to save predictions here
+    # Create predictions directory if it doesn't exist
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    # Example:
+    # import pandas as pd
+    # pd.Series(predictions).to_csv(output_path, index=False)
     pass
 
 def main():
-    """Main prediction function."""
-    logger = logging.getLogger(__name__)
-    logger.info('Making predictions')
-    
+    """Run the prediction pipeline."""
     # Load model and scaler
     model, scaler = load_model()
     
     # Load data
-    X = load_data()
+    features = load_data()
     
     # Make predictions
-    predictions = make_predictions(model, scaler, X)
+    predictions = make_predictions(model, scaler, features)
     
     # Save predictions
     save_predictions(predictions)
 
 if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
     main() 
