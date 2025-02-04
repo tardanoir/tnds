@@ -109,6 +109,22 @@ def cli(ctx):
                 output_dir=config['output_dir']
             )
             
+            # If Django is included, update the pyproject.toml to add Django dependencies
+            if config['include_django']:
+                project_path = Path(config['output_dir']) / config['project_name']
+                pyproject_path = project_path / "pyproject.toml"
+                with open(pyproject_path, 'r') as f:
+                    content = f.read()
+                
+                # Add Django dependencies to the main dependencies list
+                content = content.replace(
+                    ']\n\n[project.optional-dependencies]',
+                    ',\n    "django>=4.2.0",\n    "djangorestframework>=3.14.0"\n]\n\n[project.optional-dependencies]'
+                )
+                
+                with open(pyproject_path, 'w') as f:
+                    f.write(content)
+            
             console.print("\n✨ Project successfully created! ✨\n", style="green bold")
             console.print("Next steps:")
             console.print("  1. cd", config['project_name'])

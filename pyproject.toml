@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Custom Data Science Project Generator"
 readme = "README.md"
 requires-python = ">=3.8"
-license = "MIT"
+license = {text = "MIT"}
 authors = [
     { name = "Your Name", email = "your.email@example.com" },
 ]
@@ -58,13 +58,20 @@ tnds = "custom_ds_cli.cli:cli"
 packages = ["src/custom_ds_cli"]
 
 [tool.ruff]
-select = [
-    "E",  # pycodestyle errors
-    "F",  # pyflakes
-    "I",  # isort
-    "UP", # pyupgrade
-    "N",  # pep8-naming
-    "B",  # flake8-bugbear
-    "C4", # flake8-comprehensions
-]
-fix = true 
+# Enable pycodestyle ('E'), pyflakes ('F'), isort ('I'), pyupgrade ('UP'), naming ('N'), bugbear ('B'), comprehensions ('C4')
+select = ["E", "F", "I", "UP", "N", "B", "C4"]
+
+# Same as Black.
+line-length = 88
+indent-width = 4
+
+# Assume Python 3.8
+target-version = "py38"
+
+[tool.ruff.format]
+# Use double quotes for strings.
+quote-style = "double"
+# Indent with spaces.
+indent-style = "space"
+# Line ending style
+line-ending = "auto" 
